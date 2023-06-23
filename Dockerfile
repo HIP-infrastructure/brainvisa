@@ -3,9 +3,7 @@ ARG TAG
 ARG DOCKERFS_TYPE
 ARG DOCKERFS_VERSION
 ARG APP_VERSION
-#FROM ${CI_REGISTRY_IMAGE}/${DOCKERFS_TYPE}:${DOCKERFS_VERSION}${TAG} as ghostfs
-#FROM brainvisa:5.0.4
-FROM brainvisa:${APP_VERSION}
+FROM ${CI_REGISTRY_IMAGE}/brainvisa-vbox:${APP_VERSION}
 
 LABEL maintainer="florian.sipp@chuv.ch"
 
