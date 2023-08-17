@@ -3,7 +3,7 @@ ARG TAG
 ARG DOCKERFS_TYPE
 ARG DOCKERFS_VERSION
 ARG APP_VERSION
-FROM ${CI_REGISTRY_IMAGE}/brainvisa-vbox:${APP_VERSION}${TAG}
+FROM ${CI_REGISTRY_IMAGE}/brainvisa-vbox:${APP_VERSION}
 
 LABEL maintainer="florian.sipp@chuv.ch"
 
