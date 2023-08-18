@@ -23,8 +23,9 @@ RUN apt-get update && \
     # ghostfs
     fuse libfuse2 binutils libssl-dev \
     # virtualgl
-    ca-certificates libglu1-mesa libegl1-mesa libxv1 libxtst6
-    #apt-get remove -y --purge curl && \
+    ca-certificates libglu1-mesa libegl1-mesa libxv1 libxtst6 && \
+    # cleanup the brainvisa-vbox image
+    apt-get remove -y --purge iproute2 iptables iputils-ping iputils-tracepath bind9-dnsutils bind9-host bind9-libs 
     #apt-get autoremove -y --purge && \
     #apt-get clean && \
     #rm -rf /var/lib/apt/lists/*
