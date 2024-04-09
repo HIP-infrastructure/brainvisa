@@ -4,6 +4,8 @@ ARG DOCKERFS_TYPE
 ARG DOCKERFS_VERSION
 ARG APP_VERSION
 FROM ${CI_REGISTRY_IMAGE}/brainvisa-vbox:${APP_VERSION}
+ARG VIRTUALGL_VERSION
+ARG GHOSTFS_VERSION
 
 LABEL maintainer="florian.sipp@chuv.ch"
 
@@ -31,14 +33,14 @@ RUN apt-get update && \
     #rm -rf /var/lib/apt/lists/*
 
 # ghostfs
-RUN curl -sSOL https://github.com/pouya-eghbali/ghostfs-builds/releases/download/linux-ubuntu-22.04-6201193-dev/GhostFS && \
+RUN curl -sSOL https://github.com/pouya-eghbali/ghostfs-builds/releases/download/linux-ubuntu-22.04-${GHOSTFS_VERSION}/GhostFS && \
     chmod +x GhostFS && \
     mv GhostFS /usr/bin
 
-# virtualgl 3.1
-RUN curl -sSO https://s3.amazonaws.com/virtualgl-pr/main/linux/virtualgl_3.1_amd64.deb && \
-    dpkg -i virtualgl_3.1_amd64.deb && \
-    rm virtualgl_3.1_amd64.deb
+# virtualgl
+RUN curl -sSO https://s3.amazonaws.com/virtualgl-pr/main/linux/virtualgl_${VIRTUALGL_VERSION}_amd64.deb && \
+    dpkg -i virtualgl_${VIRTUALGL_VERSION}_amd64.deb && \
+    rm virtualgl_${VIRTUALGL_VERSION}_amd64.deb
 
 ENV APP_SPECIAL="no"
 ENV APP_CMD="/casa/install/bin/brainvisa"
