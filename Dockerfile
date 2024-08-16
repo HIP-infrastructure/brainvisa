@@ -43,7 +43,7 @@ RUN curl -fsSL https://packagecloud.io/dcommander/virtualgl/gpgkey | \
     echo 'deb [signed-by=/usr/share/keyrings/virtualgl.gpg] https://packagecloud.io/dcommander/virtualgl/any/ any main' | \
         tee /etc/apt/sources.list.d/virtualgl.list && \
     apt-get update -q && \
-    version=$(apt-cache madison virtualgl | grep -o "${VERSION}-[0-9]*") && \
+    version=$(apt-cache madison virtualgl | grep -o "${VIRTUALGL_VERSION}-[0-9]*") && \
     apt-get install --no-install-recommends -y \
         virtualgl=${version}
 
