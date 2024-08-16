@@ -38,9 +38,14 @@ RUN curl -sSOL https://github.com/pouya-eghbali/ghostfs-builds/releases/download
     mv GhostFS /usr/bin
 
 # virtualgl
-RUN curl -sSO https://s3.amazonaws.com/virtualgl-pr/main/linux/virtualgl_${VIRTUALGL_VERSION}_amd64.deb && \
-    dpkg -i virtualgl_${VIRTUALGL_VERSION}_amd64.deb && \
-    rm virtualgl_${VIRTUALGL_VERSION}_amd64.deb
+RUN curl -fsSL https://packagecloud.io/dcommander/virtualgl/gpgkey | \
+        gpg --yes --dearmor -o /usr/share/keyrings/virtualgl.gpg && \
+    echo 'deb [signed-by=/usr/share/keyrings/virtualgl.gpg] https://packagecloud.io/dcommander/virtualgl/any/ any main' | \
+        tee /etc/apt/sources.list.d/virtualgl.list && \
+    apt-get update -q && \
+    version=$(apt-cache madison virtualgl | grep -o "${VIRTUALGL_VERSION}-[0-9]*") && \
+    apt-get install --no-install-recommends -y \
+        virtualgl=${version}
 
 ENV APP_SPECIAL="no"
 ENV APP_CMD="/casa/install/bin/brainvisa"
