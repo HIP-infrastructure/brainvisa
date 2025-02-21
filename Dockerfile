@@ -1,9 +1,9 @@
 ARG CI_REGISTRY_IMAGE
+ARG APP_VERSION
+FROM ${CI_REGISTRY_IMAGE}/brainvisa-vbox:${APP_VERSION}
 ARG TAG
 ARG DOCKERFS_TYPE
 ARG DOCKERFS_VERSION
-ARG APP_VERSION
-FROM ${CI_REGISTRY_IMAGE}/brainvisa-vbox:${APP_VERSION}
 ARG VIRTUALGL_VERSION
 ARG GHOSTFS_VERSION
 
@@ -33,7 +33,7 @@ RUN apt-get update && \
     #rm -rf /var/lib/apt/lists/*
 
 # ghostfs
-RUN curl -sSOL https://github.com/pouya-eghbali/ghostfs-builds/releases/download/linux-ubuntu-22.04-${GHOSTFS_VERSION}/GhostFS && \
+RUN curl -sSOL https://github.com/pouya-eghbali/ghostfs-builds/releases/download/linux-ubuntu-22.04-${GHOSTFS_VERSION}${TAG}/GhostFS && \
     chmod +x GhostFS && \
     mv GhostFS /usr/bin
 
